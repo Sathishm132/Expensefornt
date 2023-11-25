@@ -10,7 +10,7 @@ export const DeleteExpense = (props) => {
   const {expense,setExpense}=useContext(Context)
   const deletehandler=()=>{
     const newexpense=expense.filter((element)=>(element.id!==props.id))
-    axios.delete(`http://localhost:5000/api/${props.id}`,{headers:{"Authorization":token}});
+    axios.delete(`http://3.81.206.128:5000/${props.id}`,{headers:{"Authorization":token}});
   
     setExpense(newexpense)
    console.log(newexpense)

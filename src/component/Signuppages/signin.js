@@ -17,7 +17,7 @@ const Signin = () => {
         password:password.current.value,
 
       }
-      const res=await axios.post("http://localhost:5000/signin",user)
+      const res=await axios.post("http://3.81.206.128:5000/signin",user)
       await localStorage.setItem("token",res.data.token)
        
        if(res.data.premium===true){

@@ -6,7 +6,7 @@ const Password = () => {
     const email=useRef()
     const submithandler=(e)=>{
         e.preventDefault()
-        axios.post("http://localhost:5000/password",{email:email.current.value})
+        axios.post("http://3.81.206.128:5000/password",{email:email.current.value})
 
     }
   return (

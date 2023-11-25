@@ -19,12 +19,12 @@ const ExpenseNavbar = () => {
   console.log(premium)
   const clickhandler=async(e)=>{
     e.preventDefault()
-   const respone= await  axios.get("http://localhost:5000/payment",{headers:{"Authorization":token}})
+   const respone= await  axios.get("http://3.81.206.128:5000/payment",{headers:{"Authorization":token}})
    const options={
     "key":respone.data.key_id,
     "order_id":respone.data.order.id,
     "handler":async(resp)=>{
-await axios.post("http://localhost:5000/payment",{"order_id":options.order_id,
+await axios.post("http://3.81.206.128:5000/payment",{"order_id":options.order_id,
 "payment_id":resp.razorpay_payment_id,},
 {headers:{"Authorization":token}})
 await localStorage.setItem("premium",true)

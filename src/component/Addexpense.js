@@ -21,7 +21,7 @@ const Addexpense = () => {
       expensecategory:expensecategory.current.value,
       expensedescription:expensedescription.current.value
     }
-    axios.post("http://localhost:5000/api",expense,{headers:{"Authorization":token}}).then(()=>{
+    axios.post("http://3.81.206.128:5000/api",expense,{headers:{"Authorization":token}}).then(()=>{
         expensedate.current.value=null;
         expenseamount.current.value=null;
         expensecategory.current.value=null;

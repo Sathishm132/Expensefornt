@@ -39,7 +39,7 @@ const Editexpense = () => {
             expensecategory:expensecategory.current.value,
             expensedescription:expensedescription.current.value
           }
-          axios.put(`http://localhost:5000/api/${id}`,updatedexpense).then(()=>{
+          axios.put(`http://3.81.206.128:5000/api/${id}`,updatedexpense).then(()=>{
             navigate("/")
           })
 

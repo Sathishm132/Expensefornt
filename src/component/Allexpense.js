@@ -2,23 +2,31 @@ import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { DeleteExpense, Editexpense } from './Expensecard'
-
+import "./tabble.css"
 import ExpenseNavbar from './ExpenseNavbar'
-import MainComponent from './Expensepage'
+
 import { Context } from './Store/Context'
+import { useParams } from 'react-router'
 
 const Allexpense = () => {
+  const [output,setOutput]=useState([])
+  const [page,setPage]=useState(1);
+  let[limit,setLimit]=useState(2)
     const {expense,setExpense}=useContext(Context)
     const token=localStorage.getItem("token")
     useEffect(()=>{
-        axios.get("http://localhost:5000/api",{headers:{"Authorization":token}}).then((res)=>{
-            setExpense(res.data.allexpenses)
+      
+        axios.get(`http://3.81.206.128:5000/api?limit=${limit}&page=${page}`,{headers:{"Authorization":token}}).then((res)=>{
+            setOutput(res.data.allexpenses)
+            
+           
         })
-    },[])
+        
+    },[limit])
 
   
    
-    const expensepage=(<MainComponent expenses={expense}/>)
+  
    
     const downloadhahdler=()=>{
       axios.get("http://localhost:5000/premium/download",{headers:{"Authorization":token}}).then((response)=>{
@@ -35,9 +43,50 @@ const Allexpense = () => {
   return (
     <div>
       <ExpenseNavbar/><br/>
+      <button onClick={downloadhahdler}> download</button>
       <Container className='mt-3'>
-        <ul><li><button onClick={downloadhahdler}>download</button></li></ul><br/>
-        {expensepage} 
+        <ul><li></li></ul><br/>
+        <div className=''>
+        
+        <table >
+          
+        <thead >
+          <tr className='page'>
+            <td className="settings"colSpan={5}>
+              <div className='topbox'>
+              <div>
+                settings
+              </div>
+              <div>
+                <button onClick={()=>{setLimit(limit+1)}}>+</button>
+                <p >+</p>
+              </div>
+              </div>
+             
+            </td>
+          </tr>
+          <tr>
+            <th>date</th>
+            <th>expense amount</th>
+            <th>expense catregory</th>
+            <th>expense description</th>
+            <th>actons</th>
+          </tr>
+        </thead>
+        <tbody>
+          {output.map((item) => (
+            <tr key={item.expenseDate}>
+              <td >{item.expenseDate}</td>
+              <td >{item.expenseamount}</td>
+              <td >{item.expensecategory}</td>
+              <td >{item.expenseDescription}</td>
+              <td ><DeleteExpense id={item.id}/><Editexpense id={item.id}/></td>
+            </tr>
+            
+          ))}
+        </tbody>
+      </table>
+      </div>
         </Container></div>
   )
 }

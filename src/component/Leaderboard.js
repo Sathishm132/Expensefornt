@@ -6,7 +6,7 @@ import ExpenseNavbar from './ExpenseNavbar'
 const Leaderboard = () => {
     const[lexoense,setLexpense]=useState([])
     useEffect(()=>{
-        axios.get("http://localhost:5000/premium").then((res)=>{
+        axios.get("http://3.81.206.128:5000/premium").then((res)=>{
             setLexpense(res.data)
           console.log(res)
         })

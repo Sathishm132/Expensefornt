@@ -16,7 +16,7 @@ const Signup = () => {
         password:password.current.value,
 
       }
-      axios.post("http://localhost:5000/user",user).then(()=>{
+      axios.post("http://3.81.206.128:5000/user",user).then(()=>{
 
       }).catch((err)=>{
         console.log(err)
